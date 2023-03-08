@@ -41,7 +41,14 @@ export const restoreCache = async (
 
   core.saveState(State.CachePrimaryKey, primaryKey);
 
-  const cacheKey = await cache.restoreCache([cachePath], primaryKey);
+  const cacheKey = await cache.restoreCache(
+    [cachePath],
+    primaryKey,
+    undefined,
+    {
+      useAzureSdk: false
+    }
+  );
   core.setOutput('cache-hit', Boolean(cacheKey));
 
   if (!cacheKey) {
